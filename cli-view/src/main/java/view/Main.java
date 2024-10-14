@@ -43,12 +43,12 @@ public class Main {
             io.readNumberRange(String.format("Enter id in range (%d..%d)", MIN_ID, MAX_ID), 
                     "Id is wrong", MIN_ID, MAX_ID).longValue(),
             io.readStringPredicate("Enter employee name (starts in capital letter, minimum 3 characters)", 
-                    "Name is wrong", s -> s.matches("[A-Z][a-z]{2,}")),
+                    "Name in wrong format", s -> s.matches("[A-Z][a-z]{2,}")),
             io.readStringOptions(String.format("Enter department %s", Arrays.toString(DEPARTMENTS)), 
                     "Department is not exist", new HashSet<>(Arrays.asList(DEPARTMENTS))),
             io.readNumberRange(String.format("Enter salary in range (%d..%d)", MIN_SALARY, MAX_SALARY), 
                     "Salary is wrong", MIN_SALARY, MAX_SALARY).intValue(),
-                    io.readIsoDateRange(String.format("Enter birthday in format yyyy-MM-DD (age must in range %d..%d)", MIN_AGE, MAX_AGE), 
+            io.readIsoDateRange(String.format("Enter birthday in format yyyy-MM-DD (age must in range %d..%d)", MIN_AGE, MAX_AGE), 
                     "Wrong Age", LocalDate.now().minusYears(MAX_AGE), LocalDate.now().minusYears(MIN_AGE))
         );
         io.writeLine(empl);
