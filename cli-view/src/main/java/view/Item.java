@@ -3,33 +3,39 @@ package view;
 import java.util.function.Consumer;
 
 public interface Item {
-String displayName();
-void perform(InputOutput io);
-boolean isExit();
-public static Item of(String displayName, Consumer<InputOutput> action, boolean isExit) {
-    return new Item() {
+    String displayName();
 
-        @Override
-        public String displayName() {
-            return displayName;
-        }
+    void perform(InputOutput io);
 
-        @Override
-        public void perform(InputOutput io) {
-           action.accept(io);
-        }
+    boolean isExit();
 
-        @Override
-        public boolean isExit() {
-            return isExit;
-        }
-        
-    };
-}
-public static Item of(String displayName, Consumer<InputOutput> action) {
-    return of(displayName, action, false);
-}
-public static Item ofExit() {
-    return of("Exit", io -> {}, true);
-}
+    public static Item of(String displayName, Consumer<InputOutput> action, boolean isExit) {
+        return new Item() {
+
+            @Override
+            public String displayName() {
+                return displayName;
+            }
+
+            @Override
+            public void perform(InputOutput io) {
+                action.accept(io);
+            }
+
+            @Override
+            public boolean isExit() {
+                return isExit;
+            }
+
+        };
+    }
+
+    public static Item of(String displayName, Consumer<InputOutput> action) {
+        return of(displayName, action, false);
+    }
+
+    public static Item ofExit() {
+        return of("Exit", io -> {
+        }, true);
+    }
 }
